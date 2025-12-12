@@ -1,0 +1,8 @@
+{
+  "label": "Textbook",
+  "position": 2,
+  "link": {
+    "type": "generated-index",
+    "description": "Complete Physical AI & Humanoid Robotics Textbook"
+  }
+}

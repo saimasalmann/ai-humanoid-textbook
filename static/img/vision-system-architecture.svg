@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  <title>Robotic Vision System Architecture</title>
+  <desc>Diagram showing image acquisition, preprocessing, feature extraction, and object detection components</desc>
+
+  <!-- Background -->
+  <rect width="100%" height="100%" fill="#f8f9fa"/>
+
+  <!-- Camera Input -->
+  <rect x="50" y="50" width="120" height="80" fill="#4285f4" stroke="#1a237e" stroke-width="2" rx="10"/>
+  <text x="110" y="90" text-anchor="middle" fill="white" font-family="Arial" font-size="14" font-weight="bold">Camera</text>
+  <text x="110" y="110" text-anchor="middle" fill="white" font-family="Arial" font-size="14" font-weight="bold">Input</text>
+
+  <!-- Preprocessing Block -->
+  <rect x="200" y="50" width="120" height="80" fill="#34a853" stroke="#1b5e20" stroke-width="2" rx="10"/>
+  <text x="260" y="85" text-anchor="middle" fill="white" font-family="Arial" font-size="14" font-weight="bold">Image</text>
+  <text x="260" y="105" text-anchor="middle" fill="white" font-family="Arial" font-size="14" font-weight="bold">Preprocessing</text>
+
+  <!-- Feature Extraction Block -->
+  <rect x="350" y="50" width="120" height="80" fill="#fbbc04" stroke="#f57c00" stroke-width="2" rx="10"/>
+  <text x="410" y="85" text-anchor="middle" fill="white" font-family="Arial" font-size="14" font-weight="bold">Feature</text>
+  <text x="410" y="105" text-anchor="middle" fill="white" font-family="Arial" font-size="14" font-weight="bold">Extraction</text>
+
+  <!-- Object Detection Block -->
+  <rect x="500" y="50" width="120" height="80" fill="#ea4335" stroke="#b71c1c" stroke-width="2" rx="10"/>
+  <text x="560" y="85" text-anchor="middle" fill="white" font-family="Arial" font-size="14" font-weight="bold">Object</text>
+  <text x="560" y="105" text-anchor="middle" fill="white" font-family="Arial" font-size="14" font-weight="bold">Detection</text>
+
+  <!-- Decision Making Block -->
+  <rect x="650" y="50" width="120" height="80" fill="#ff6d01" stroke="#e65100" stroke-width="2" rx="10"/>
+  <text x="710" y="85" text-anchor="middle" fill="white" font-family="Arial" font-size="14" font-weight="bold">Decision</text>
+  <text x="710" y="105" text-anchor="middle" fill="white" font-family="Arial" font-size="14" font-weight="bold">Making</text>
+
+  <!-- Arrows between processing blocks -->
+  <line x1="170" y1="90" x2="200" y2="90" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="320" y1="90" x2="350" y2="90" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="470" y1="90" x2="500" y2="90" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="620" y1="90" x2="650" y2="90" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Robot Vision Output -->
+  <rect x="300" y="300" width="200" height="80" fill="#9c27b0" stroke="#4a148c" stroke-width="2" rx="10"/>
+  <text x="400" y="335" text-anchor="middle" fill="white" font-family="Arial" font-size="14" font-weight="bold">Robot</text>
+  <text x="400" y="355" text-anchor="middle" fill="white" font-family="Arial" font-size="14" font-weight="bold">Action Output</text>
+
+  <!-- Connection from Decision Making to Robot Output -->
+  <line x1="710" y1="130" x2="710" y2="340" stroke="#9c27b0" stroke-width="2" stroke-dasharray="5,5" marker-end="url(#arrow)"/>
+  <line x1="710" y1="340" x2="500" y2="340" stroke="#9c27b0" stroke-width="2" stroke-dasharray="5,5" marker-end="url(#arrow)"/>
+
+  <!-- Arrow marker definition -->
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#333"/>
+    </marker>
+  </defs>
+
+  <!-- Vision Processing Flow Label -->
+  <text x="400" y="25" text-anchor="middle" font-family="Arial" font-size="16" font-weight="bold" fill="#1a237e">Vision Processing Pipeline</text>
+</svg>

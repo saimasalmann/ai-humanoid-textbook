@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <title>Physical AI Logo</title>
+  <desc>Logo for Physical AI &amp; Humanoid Robotics Textbook</desc>
+
+  <!-- Background circle -->
+  <circle cx="50" cy="50" r="45" fill="#4285f4"/>
+
+  <!-- Robot icon -->
+  <rect x="35" y="30" width="30" height="30" rx="5" fill="white"/>
+  <circle cx="45" cy="40" r="3" fill="#333"/>
+  <circle cx="55" cy="40" r="3" fill="#333"/>
+  <rect x="40" y="60" width="20" height="15" fill="white"/>
+
+  <!-- AI circuit pattern -->
+  <path d="M20,20 Q30,10 40,20 T60,20" stroke="white" stroke-width="2" fill="none"/>
+  <path d="M60,80 Q70,90 80,80 T90,80" stroke="white" stroke-width="2" fill="none"/>
+
+  <text x="50" y="90" text-anchor="middle" fill="white" font-family="Arial" font-size="10" font-weight="bold">PAI</text>
+</svg>

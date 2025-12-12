@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <title>Simulation</title>
+  <rect width="100%" height="100%" fill="#fbbc04"/>
+  <rect x="40" y="40" width="120" height="120" rx="10" stroke="#fff" stroke-width="5" fill="none"/>
+  <circle cx="100" cy="100" r="30" fill="#fff"/>
+  <path d="M100 70 L100 50 M100 130 L100 150 M70 100 L50 100 M130 100 L150 100" stroke="#fff" stroke-width="5"/>
+</svg>

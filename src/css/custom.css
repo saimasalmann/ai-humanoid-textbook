@@ -1,0 +1,88 @@
+/**
+ * Custom CSS for the Physical AI & Humanoid Robotics Textbook
+ * Accessibility-focused styles following WCAG 2.1 AA standards
+ */
+
+/* Ensure sufficient color contrast */
+:root {
+  --ifm-color-primary: #2563eb;
+  --ifm-color-primary-dark: #1d4ed8;
+  --ifm-color-primary-darker: #1e40af;
+  --ifm-color-primary-darkest: #1e3a8a;
+  --ifm-color-primary-light: #3b82f6;
+  --ifm-color-primary-lighter: #60a5fa;
+  --ifm-color-primary-lightest: #93c5fd;
+}
+
+/* Focus indicators for keyboard navigation */
+a:focus,
+button:focus,
+input:focus,
+select:focus,
+textarea:focus,
+[tabindex]:focus {
+  outline: 3px solid var(--ifm-color-primary);
+  outline-offset: 2px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  :root {
+    --ifm-color-primary: #0066cc;
+    --ifm-color-primary-dark: #004c99;
+    --ifm-color-primary-darkest: #003366;
+    --ifm-color-primary-light: #3399ff;
+    --ifm-color-primary-lightest: #66ccff;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Ensure readable font sizes */
+.markdown h1 {
+  font-size: 2rem;
+}
+
+.markdown h2 {
+  font-size: 1.5rem;
+}
+
+.markdown h3 {
+  font-size: 1.25rem;
+}
+
+.markdown p {
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+/* Code block accessibility */
+.prism-code {
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+/* Alt text for images */
+img[alt=""] {
+  border: 2px dashed #d32f2f;
+}
+
+/* Screen reader only content helper */
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}

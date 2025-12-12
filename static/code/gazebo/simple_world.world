@@ -1,0 +1,88 @@
+<?xml version="1.0" ?>
+<sdf version="1.6">
+  <world name="simple_world">
+    <!-- Include the sun -->
+    <include>
+      <uri>model://sun</uri>
+    </include>
+
+    <!-- Include the ground plane -->
+    <include>
+      <uri>model://ground_plane</uri>
+    </include>
+
+    <!-- Simple box obstacle -->
+    <model name="box_obstacle">
+      <pose>2 0 0.5 0 0 0</pose>
+      <link name="link">
+        <inertial>
+          <mass>1.0</mass>
+          <inertia>
+            <ixx>0.083</ixx>
+            <ixy>0.0</ixy>
+            <ixz>0.0</ixz>
+            <iyy>0.083</iyy>
+            <iyz>0.0</iyz>
+            <izz>0.083</izz>
+          </inertia>
+        </inertial>
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>1 1 1</size>
+            </box>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>1 1 1</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.5 0.5 0.5 1</ambient>
+            <diffuse>0.7 0.7 0.7 1</diffuse>
+            <specular>0.01 0.01 0.01 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- Simple robot model -->
+    <model name="simple_robot">
+      <pose>0 0 0.5 0 0 0</pose>
+      <link name="chassis">
+        <inertial>
+          <mass>5.0</mass>
+          <inertia>
+            <ixx>0.416</ixx>
+            <ixy>0.0</ixy>
+            <ixz>0.0</ixz>
+            <iyy>0.416</iyy>
+            <iyz>0.0</iyz>
+            <izz>0.833</izz>
+          </inertia>
+        </inertial>
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>1 0.5 0.25</size>
+            </box>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>1 0.5 0.25</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.0 0.0 1.0 1</ambient>
+            <diffuse>0.0 0.0 1.0 1</diffuse>
+            <specular>0.01 0.01 0.01 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+  </world>
+</sdf>
