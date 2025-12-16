@@ -1,0 +1,151 @@
+# API Contract: RAG Chatbot
+
+## Chat Endpoint
+
+### POST /chat
+
+#### Description
+Process user queries and return AI-generated responses based on textbook content.
+
+#### Request
+
+**Headers**
+```
+Content-Type: application/json
+Authorization: Bearer {token} (optional, for tracking)
+```
+
+**Body**
+```json
+{
+  "sessionId": "string, required",
+  "message": "string, required - user's question",
+  "selectedText": "string, optional - text selected by user on the page",
+  "queryMode": "enum, optional - 'full-book' or 'selected-text', defaults to 'full-book'"
+}
+```
+
+**Example Request**
+```json
+{
+  "sessionId": "sess_abc123xyz",
+  "message": "Explain the concept of forward kinematics",
+  "selectedText": "Forward kinematics is the process of determining the position and orientation of the end-effector based on the joint angles.",
+  "queryMode": "selected-text"
+}
+```
+
+#### Response
+
+**Success Response (200)**
+```json
+{
+  "responseId": "string - unique identifier for this response",
+  "sessionId": "string - session identifier",
+  "message": "string - AI-generated response",
+  "retrievedContext": [
+    {
+      "content": "string - relevant text chunk from textbook",
+      "metadata": {
+        "chapter": "string - chapter title",
+        "section": "string - section title",
+        "page": "number - page number if available"
+      },
+      "similarityScore": "number - similarity score between 0 and 1"
+    }
+  ],
+  "timestamp": "string - ISO 8601 timestamp",
+  "queryMode": "enum - 'full-book' or 'selected-text'"
+}
+```
+
+**Example Response**
+```json
+{
+  "responseId": "resp_def456uvw",
+  "sessionId": "sess_abc123xyz",
+  "message": "Forward kinematics is the mathematical process of determining the position and orientation of a robot's end-effector based on the known joint angles. This is achieved through transformation matrices that map each joint's position relative to its parent in the kinematic chain.",
+  "retrievedContext": [
+    {
+      "content": "Forward kinematics is the process of determining the position and orientation of the end-effector based on the joint angles.",
+      "metadata": {
+        "chapter": "Kinematics",
+        "section": "Forward Kinematics",
+        "page": 45
+      },
+      "similarityScore": 0.92
+    }
+  ],
+  "timestamp": "2025-12-14T10:30:00Z",
+  "queryMode": "selected-text"
+}
+```
+
+**Error Responses**
+
+400 Bad Request:
+```json
+{
+  "error": "string - error message",
+  "code": "string - error code",
+  "details": "object - additional error details"
+}
+```
+
+429 Rate Limited:
+```json
+{
+  "error": "Rate limit exceeded",
+  "retryAfter": "number - seconds to wait before retrying"
+}
+```
+
+503 Service Unavailable:
+```json
+{
+  "error": "Service temporarily unavailable",
+  "fallbackMessage": "string - graceful fallback message"
+}
+```
+
+#### Rate Limiting
+- 10 requests per minute per session
+- Uses token bucket algorithm
+- Returns 429 status when limit exceeded
+
+---
+
+## Health Check Endpoint
+
+### GET /health
+
+#### Description
+Check the health status of the API and its dependencies.
+
+#### Response
+
+**Success Response (200)**
+```json
+{
+  "status": "healthy",
+  "timestamp": "string - ISO 8601 timestamp",
+  "dependencies": {
+    "qdrant": "healthy",
+    "postgres": "healthy",
+    "openai": "healthy"
+  }
+}
+```
+
+**Error Response (503)**
+```json
+{
+  "status": "unhealthy",
+  "timestamp": "string - ISO 8601 timestamp",
+  "dependencies": {
+    "qdrant": "unhealthy",
+    "postgres": "healthy",
+    "openai": "degraded"
+  }
+}
+```

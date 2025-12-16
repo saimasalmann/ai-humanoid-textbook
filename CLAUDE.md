@@ -214,6 +214,9 @@ See `.specify/memory/constitution.md` for code quality, testing, performance, se
 - Git repository for version control, GitHub Pages for static hosting (001-ai-humanoid-textbook)
 - Markdown for content, Python 3.8+ for code examples, JavaScript/TypeScript for Docusaurus customization, with ROS 2 Humble Hawksbill distribution + Docusaurus 3.x, Node.js 18+, npm/yarn, ROS 2 Humble Hawksbill, Gazebo Garden/Harmonic, NVIDIA Isaac Sim (001-ai-humanoid-textbook)
 - Git repository for version control, GitHub Pages for static hosting, with potential cloud storage for large simulation assets (001-ai-humanoid-textbook)
+- Python 3.11, JavaScript/TypeScript for frontend + FastAPI, OpenAI Agents SDK, ChatKit Python, ChatKit.js, Qdrant client, Neon Postgres driver (001-rag-chatbot)
+- Neon Serverless Postgres for chat sessions, Qdrant Cloud for vector embeddings (001-rag-chatbot)
+- Python 3.11, JavaScript/TypeScript for frontend + FastAPI, OpenAI Agents SDK (with Google Gemini via AsyncOpenAI and OpenAIChatCompletions), ChatKit Python, ChatKit.js, Qdrant client, Neon Postgres driver, google-generativeai (001-rag-chatbot)
 
 ## Recent Changes
 - 001-ai-humanoid-textbook: Added Markdown, Python 3.8+ for code examples, JavaScript/TypeScript for Docusaurus customization + Docusaurus, Node.js 18+, npm/yarn, ROS 2 (Humble Hawksbill or later), Gazebo, NVIDIA Isaac Sim
