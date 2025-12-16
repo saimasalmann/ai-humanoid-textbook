@@ -46,7 +46,17 @@ async def chat_endpoint(
     """
     try:
         # Parse request body
-        body = await request.json()
+        try:
+            body = await request.json()
+        except Exception as e:
+            logger.error(f"Error parsing JSON request: {str(e)}")
+            raise HTTPException(status_code=400, detail="Invalid JSON in request body")
+
+        # Validate that body is not empty
+        if not body:
+            logger.warning("Empty request body received")
+            raise HTTPException(status_code=400, detail="Request body cannot be empty")
+
         session_id = body.get("sessionId")
         user_message = body.get("message")
         selected_text = body.get("selectedText")
@@ -79,7 +89,7 @@ async def chat_endpoint(
 
         # Process the query
         response = await chat_service.process_query(
-            session.sessionId, user_message, query_mode, selected_text
+            session.session_id, user_message, query_mode, selected_text
         )
 
         # Check if there was an error in processing

@@ -119,6 +119,79 @@ cd backend
 pytest tests/integration/
 ```
 
+## Error Checking and Optimization
+
+### Frontend Error Handling
+1. **Error Boundaries**: The ChatWidget is wrapped in error boundaries to catch JavaScript errors
+2. **API Error Handling**: Network errors show user-friendly messages in the chat interface
+3. **Input Validation**: Messages are validated before sending to prevent malformed requests
+4. **Accessibility**: All error messages are accessible to screen readers
+
+### Backend Error Handling
+1. **Pydantic Validation**: All inputs validated with Pydantic models at API endpoints
+2. **Custom Exception Handlers**: Specific handlers for different error types (validation, business logic, infrastructure)
+3. **Rate Limiting**: Enforced at 10 requests/minute per session with proper error responses
+4. **Service Failures**: Circuit breaker pattern for external services (Qdrant, Gemini API)
+5. **Structured Logging**: Comprehensive logging with correlation IDs for debugging
+
+### Image Optimization
+- All current images are SVG format (technical diagrams) optimized with SVGO
+- Located in `frontend/static/img/` directory
+- Total size ~33KB with potential for additional 15KB savings through enhanced optimization
+- For new images: Use SVG for diagrams, WebP for photos with fallbacks
+
+### Validation Scripts
+Run before deployment to ensure quality:
+```bash
+# Backend validation
+cd backend
+python -m pytest tests/  # Run all tests
+python -c "import src.services.chat_service; print('Chat service imports successfully')"  # Import validation
+
+# Frontend validation
+cd frontend
+npm run build  # Build validation
+```
+
+## Testing
+
+### Unit Tests
+```bash
+cd backend
+pytest tests/unit/
+```
+
+### Integration Tests
+```bash
+cd backend
+pytest tests/integration/
+```
+
+### Error Path Tests
+Test error handling scenarios:
+```bash
+# Test rate limiting
+for i in {1..15}; do
+  curl -X POST http://localhost:8000/chat -H "Content-Type: application/json" \
+    -d '{"sessionId": "test-rate-limit", "message": "Test message '"$i"'", "queryMode": "full-book"}'
+  sleep 0.5
+done
+
+# Test invalid inputs
+curl -X POST http://localhost:8000/chat -H "Content-Type: application/json" \
+  -d '{"sessionId": "", "message": "", "queryMode": "invalid-mode"}'
+```
+
 ## Deployment
 
 The backend can be deployed independently on platforms like Render, Railway, or any cloud provider that supports Python/FastAPI applications.
+
+### Pre-deployment Checklist
+- [ ] All tests pass (unit, integration, error paths)
+- [ ] Error boundaries are functional
+- [ ] Rate limiting is enforced and tested
+- [ ] Images are optimized and validated
+- [ ] Logging is configured for production
+- [ ] Health check endpoint returns healthy status
+- [ ] Security headers are properly set
+- [ ] Performance metrics meet requirements

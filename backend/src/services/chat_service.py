@@ -41,11 +41,11 @@ class ChatService:
         expires_at = now + timedelta(days=30)  # 30-day retention
 
         session = ChatSession(
-            sessionId=session_id,
-            userId=None,  # Anonymous user
-            createdAt=now,
-            lastActiveAt=now,
-            expiresAt=expires_at
+            session_id=session_id,
+            user_id=None,  # Anonymous user
+            created_at=now,
+            last_active_at=now,
+            expires_at=expires_at
         )
 
         # Store in database
