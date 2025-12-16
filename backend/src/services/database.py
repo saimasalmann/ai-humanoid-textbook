@@ -86,15 +86,15 @@ class DatabaseService:
                 INSERT INTO chat_sessions (session_id, user_id, created_at, last_active_at, expires_at)
                 VALUES ($1, $2, $3, $4, $5)
                 """,
-                session.sessionId,
-                session.userId,
-                session.createdAt,
-                session.lastActiveAt,
-                session.expiresAt
+                session.session_id,
+                session.user_id,
+                session.created_at,
+                session.last_active_at,
+                session.expires_at
             )
         else:
             # Store in memory for development
-            self._sessions[session.sessionId] = session
+            self._sessions[session.session_id] = session
 
     async def get_session(self, session_id: str) -> Optional[ChatSession]:
         """
@@ -113,11 +113,11 @@ class DatabaseService:
                 if rows:
                     row = rows[0]
                     return ChatSession(
-                        sessionId=row['session_id'],
-                        userId=row['user_id'],
-                        createdAt=row['created_at'],
-                        lastActiveAt=row['last_active_at'],
-                        expiresAt=row['expires_at']
+                        session_id=row['session_id'],
+                        user_id=row['user_id'],
+                        created_at=row['created_at'],
+                        last_active_at=row['last_active_at'],
+                        expires_at=row['expires_at']
                     )
                 return None
             except Exception:
@@ -145,7 +145,7 @@ class DatabaseService:
             # Update in-memory storage
             if session_id in self._sessions:
                 session = self._sessions[session_id]
-                session.lastActiveAt = last_active_at
+                session.last_active_at = last_active_at
                 self._sessions[session_id] = session
 
     async def create_message(self, message: Message):
@@ -158,19 +158,19 @@ class DatabaseService:
                 INSERT INTO messages (message_id, session_id, role, content, timestamp, query_mode, selected_text)
                 VALUES ($1, $2, $3, $4, $5, $6, $7)
                 """,
-                message.messageId,
-                message.sessionId,
+                message.message_id,
+                message.session_id,
                 message.role,
                 message.content,
                 message.timestamp,
-                message.queryMode,
-                message.selectedText
+                message.query_mode,
+                message.selected_text
             )
         else:
             # Store in memory for development
-            if message.sessionId not in self._messages:
-                self._messages[message.sessionId] = []
-            self._messages[message.sessionId].append(message)
+            if message.session_id not in self._messages:
+                self._messages[message.session_id] = []
+            self._messages[message.session_id].append(message)
 
     async def get_messages_by_session(self, session_id: str, limit: int = 50) -> List[Message]:
         """
@@ -192,13 +192,13 @@ class DatabaseService:
                 messages = []
                 for row in rows:
                     message = Message(
-                        messageId=row['message_id'],
-                        sessionId=row['session_id'],
+                        message_id=row['message_id'],
+                        session_id=row['session_id'],
                         role=row['role'],
                         content=row['content'],
                         timestamp=row['timestamp'],
-                        queryMode=row['query_mode'],
-                        selectedText=row['selected_text']
+                        query_mode=row['query_mode'],
+                        selected_text=row['selected_text']
                     )
                     messages.append(message)
                 return messages
@@ -221,7 +221,7 @@ class DatabaseService:
         """
         # For now, just log this since we don't have a query_requests table defined
         # In a real implementation, you would create and insert into a query_requests table
-        print(f"Query request created: {query_request.requestId} for session {query_request.sessionId}")
+        print(f"Query request created: {query_request.request_id} for session {query_request.session_id}")
 
     async def delete_expired_sessions(self):
         """
@@ -245,7 +245,7 @@ class DatabaseService:
             now = datetime.utcnow()
             expired_sessions = []
             for session_id, session in self._sessions.items():
-                if session.expiresAt < now:
+                if session.expires_at < now:
                     expired_sessions.append(session_id)
 
             for session_id in expired_sessions:
