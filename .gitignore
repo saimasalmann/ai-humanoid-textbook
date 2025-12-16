@@ -68,6 +68,17 @@ pip-delete-this-directory.txt
 .coverage
 .pytest_cache/
 
+# Backend specific (for RAG chatbot)
+backend/__pycache__/
+backend/.venv/
+backend/venv/
+backend/env/
+backend/ENV/
+backend/*.log
+backend/logs/
+backend/.env*
+backend/.env
+
 # Sensitive files
 secrets/
 *.key

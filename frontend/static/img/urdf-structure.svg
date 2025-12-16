@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="700" height="500" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .title { font: bold 16px sans-serif; fill: #333; }
+    .component { font: 14px sans-serif; fill: #fff; }
+    .link { fill: #5bc0de; stroke: #2aabd2; stroke-width: 2; rx: 10; ry: 10; }
+    .joint { fill: #f0ad4e; stroke: #d58512; stroke-width: 2; rx: 10; ry: 10; }
+    .geometry { fill: #d9534f; stroke: #a03a33; stroke-width: 2; rx: 10; ry: 10; }
+  </style>
+
+  <!-- Title -->
+  <text x="350" y="30" text-anchor="middle" class="title">URDF Structure</text>
+
+  <!-- Base Link -->
+  <rect x="300" y="80" width="150" height="60" class="link"/>
+  <text x="375" y="115" text-anchor="middle" class="component">base_link</text>
+
+  <!-- Joint 1 -->
+  <rect x="350" y="180" width="120" height="50" class="joint"/>
+  <text x="410" y="210" text-anchor="middle" class="component">joint1</text>
+
+  <!-- Link 1 -->
+  <rect x="300" y="270" width="150" height="60" class="link"/>
+  <text x="375" y="305" text-anchor="middle" class="component">link1</text>
+
+  <!-- Joint 2 -->
+  <rect x="350" y="370" width="120" height="50" class="joint"/>
+  <text x="410" y="400" text-anchor="middle" class="component">joint2</text>
+
+  <!-- Geometry box -->
+  <rect x="100" y="200" width="120" height="60" class="geometry"/>
+  <text x="160" y="230" text-anchor="middle" class="component">Geometry</text>
+  <text x="160" y="250" text-anchor="middle" class="component">&amp; Materials</text>
+
+  <!-- Arrows -->
+  <line x1="375" y1="140" x2="375" y2="180" stroke="#000" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="375" y1="230" x2="375" y2="270" stroke="#000" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="375" y1="330" x2="375" y2="370" stroke="#000" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="220" y1="230" x2="300" y2="230" stroke="#000" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Arrow marker definition -->
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 9,3 Z" fill="#000" />
+    </marker>
+  </defs>
+</svg>
